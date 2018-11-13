@@ -20,6 +20,7 @@ import DetailContainer from '../detail/DetailContainer'
 import Help from '../common/info/Help'
 import AboutContainer from '../common/info/AboutContainer'
 import CartContainer from '../cart/CartContainer'
+import DownloaderContainer from '../download/DownloaderContainer'
 
 import LoadingBarContainer from '../loading/LoadingBarContainer'
 
@@ -170,6 +171,11 @@ export default class Root extends Component {
           </Route>
 
           {cart}
+
+          {/* TODO: delete (temporary downloader route for building out component) */}
+          <Route path={"/download"}>
+            <DownloaderContainer/>
+          </Route>
 
           <Route path="/error">
             <ErrorContainer />
