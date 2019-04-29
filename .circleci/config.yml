@@ -216,7 +216,7 @@ jobs:
 
       - run:
           name: E2E tests
-          command: ./gradlew e2e-tests:test
+          command: ./gradlew e2e-tests:test -x BuildDockerImage -x integrationTest
 
       - <<: *saveCache
 
