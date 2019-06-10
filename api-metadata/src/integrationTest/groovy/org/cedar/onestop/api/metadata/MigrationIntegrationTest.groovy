@@ -73,9 +73,6 @@ class MigrationIntegrationTest extends Specification {
 
   ElasticsearchConfig esConfig
 
-  @Autowired
-  IntegrationTestUtil integrationTestUtil
-
   def setup() {
     restTemplate = new RestTemplate()
     restTemplate.errorHandler = new TestResponseErrorHandler()
@@ -129,7 +126,7 @@ class MigrationIntegrationTest extends Specification {
     etlService.updateSearchIndices()
 
     then: 'the search granules and flattened granules have been indexed in search'
-    def firstIndexing = integrationTestUtil.documentsByType(esConfig.COLLECTION_SEARCH_INDEX_ALIAS, esConfig.GRANULE_SEARCH_INDEX_ALIAS, esConfig.FLAT_GRANULE_SEARCH_INDEX_ALIAS)
+    def firstIndexing = IntegrationTestUtil.documentsByType(elasticsearchService, esConfig.COLLECTION_SEARCH_INDEX_ALIAS, esConfig.GRANULE_SEARCH_INDEX_ALIAS, esConfig.FLAT_GRANULE_SEARCH_INDEX_ALIAS)
     List<Map> indexedCollections = firstIndexing[esConfig.TYPE_COLLECTION] as List<Map>
     def collection = indexedCollections.first()
     List<Map> indexedGranules = firstIndexing[esConfig.TYPE_GRANULE] as List<Map>
@@ -165,7 +162,7 @@ class MigrationIntegrationTest extends Specification {
     etlService.updateSearchIndices()
 
     then: 'the search granules and flattened granules have an updated parent identifier'
-    def reindexed = integrationTestUtil.documentsByType(esConfig.COLLECTION_SEARCH_INDEX_ALIAS, esConfig.GRANULE_SEARCH_INDEX_ALIAS, esConfig.FLAT_GRANULE_SEARCH_INDEX_ALIAS)
+    def reindexed = IntegrationTestUtil.documentsByType(elasticsearchService, esConfig.COLLECTION_SEARCH_INDEX_ALIAS, esConfig.GRANULE_SEARCH_INDEX_ALIAS, esConfig.FLAT_GRANULE_SEARCH_INDEX_ALIAS)
     def reindexedCollections = reindexed[esConfig.TYPE_COLLECTION] as List<Map>
     def reindexedCollection = reindexedCollections.first()
     def reindexedGranules = reindexed[esConfig.TYPE_GRANULE] as List<Map>

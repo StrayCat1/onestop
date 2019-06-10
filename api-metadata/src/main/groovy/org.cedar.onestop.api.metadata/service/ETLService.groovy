@@ -4,11 +4,13 @@ import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.exception.ExceptionUtils
 import org.cedar.onestop.elastic.common.ElasticsearchConfig
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.scheduling.annotation.Async
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import static org.cedar.onestop.elastic.common.DocumentUtil.*
 
+@Profile('!integration')
 @Slf4j
 @Service
 class ETLService {

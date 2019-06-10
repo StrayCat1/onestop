@@ -4,9 +4,11 @@ import groovy.util.logging.Slf4j
 import org.elasticsearch.Version
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 
+@Profile('!integration')
 @Slf4j
 @Component
 class ElasticsearchConfig {

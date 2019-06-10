@@ -6,12 +6,9 @@ import org.springframework.stereotype.Component
 import org.cedar.onestop.elastic.common.ElasticsearchConfig
 import static org.cedar.onestop.elastic.common.DocumentUtil.*
 
-@Component
 class IntegrationTestUtil{
-  @Autowired
-  ElasticsearchService elasticsearchService
 
-  Map documentsByType(String collectionIndex, String granuleIndex, String flatGranuleIndex = null) {
+  static Map documentsByType(ElasticsearchService elasticsearchService, String collectionIndex, String granuleIndex, String flatGranuleIndex = null) {
     log.debug("Getting documents by type...")
     log.debug("Refreshing collection and granule indices...")
     elasticsearchService.refresh(collectionIndex, granuleIndex)

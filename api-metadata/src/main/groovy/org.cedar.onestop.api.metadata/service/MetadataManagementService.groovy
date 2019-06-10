@@ -7,11 +7,13 @@ import org.cedar.onestop.elastic.common.ElasticsearchConfig
 import org.cedar.schemas.avro.psi.ParsedRecord
 import org.elasticsearch.Version
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import static org.cedar.onestop.elastic.common.DocumentUtil.*
 
+@Profile('!integration')
 @Slf4j
 @Service
 class MetadataManagementService {

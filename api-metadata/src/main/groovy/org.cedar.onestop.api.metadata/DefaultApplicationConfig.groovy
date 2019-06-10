@@ -39,6 +39,7 @@ class DefaultApplicationConfig {
   @Value('${elasticsearch.rw.pass:}')
   String rwPassword
 
+  @Profile("!integration")
   @Bean(name = 'elasticsearchVersion')
   @DependsOn('restClient')
   Version elasticsearchVersion(RestClient restClient) throws IOException {

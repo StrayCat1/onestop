@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 import static org.cedar.onestop.elastic.common.DocumentUtil.*
 
 @Slf4j
-@Profile("sitemap")
+@Profile(["!integration & sitemap"])
 @Service
 class SitemapETLService {
 
