@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     navigateToGranules: (id, filterState) => {
-      dispatch(submitGranuleSearchWithFilter(ownProps.history, id, filterState))
+      dispatch(submitGranuleSearchWithFilter(ownProps.history, id, {})) // {} -> filterState to restore granule filter functionality
     },
   }
 }

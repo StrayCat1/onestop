@@ -46,10 +46,10 @@ export default class GranulesSummary extends React.Component {
       </div>
     )
 
-    const linkText =
-      loading || totalGranuleFilteredCount == totalGranuleCount
-        ? `Show all ${totalGranuleCount} files in collection`
-        : `Show ${totalGranuleFilteredCount} matching files of ${totalGranuleCount} in collection`
+    const linkText = `Show all ${totalGranuleCount} files in collection`
+    // loading || totalGranuleFilteredCount == totalGranuleCount
+    //   ? `Show all ${totalGranuleCount} files in collection`
+    //   : `Show ${totalGranuleFilteredCount} matching files of ${totalGranuleCount} in collection`
 
     // TODO 508 this should probably be a link, not a button
     const granulesSummary = (

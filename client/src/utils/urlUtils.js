@@ -116,7 +116,7 @@ export const isHome = path => {
 }
 
 export const isSearch = path => {
-  return isRoute(path, ROUTE.collections) || isRoute(path, ROUTE.granules)
+  return isRoute(path, ROUTE.collections) //|| isRoute(path, ROUTE.granules)
 }
 
 export const isDetailPage = path => {

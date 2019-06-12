@@ -23,7 +23,6 @@ const mapStateToProps = state => {
     endDateTime,
     geoJSON,
     excludeGlobal,
-    showAppliedFilters: state.layout.showAppliedFilterBubbles,
   }
 }
 

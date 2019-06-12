@@ -9,14 +9,10 @@ import {
   SHOW_GRANULE_VIDEO,
 } from '../actions/LayoutActions'
 
-import {LOCATION_CHANGE} from 'connected-react-router'
-
 export const initialState = Immutable({
-  showLeft: true,
   leftOpen: true,
   showRight: false,
   showMap: false,
-  showAppliedFilterBubbles: false,
   onDetailPage: false,
   headerMenuOpen: false,
   granuleVideo: null,
@@ -24,19 +20,6 @@ export const initialState = Immutable({
 
 export const layout = (state = initialState, action) => {
   switch (action.type) {
-    case LOCATION_CHANGE:
-      if (!action.payload) {
-        return state
-      }
-      const path = action.payload.pathname
-      const onDetailPage = isDetailPage(path)
-      const onGranuleListPage = isGranuleListPage(path)
-      const allowSearching = !(onDetailPage || onGranuleListPage)
-      return Immutable.merge(state, {
-        showLeft: allowSearching,
-        showAppliedFilterBubbles: allowSearching,
-        // onDetailPage: onDetailPage,
-      })
     case TOGGLE_LEFT_OPEN:
       return Immutable.set(state, 'leftOpen', action.open)
     case TOGGLE_RIGHT_OPEN:
