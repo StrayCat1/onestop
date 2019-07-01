@@ -16,6 +16,7 @@
     "retire": "retire -p"
   },
   "dependencies": {
+    "cesium": "^1.59.0",
     "connected-react-router": "^4.5.0",
     "esri-leaflet": "^2.2.3",
     "esri-loader": "^2.6.0",
@@ -26,7 +27,7 @@
     "leaflet-draw": "^0.4.13",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
-    "npm": "^6.5.0",
+    "npm": "^6.9.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-animate-height": "^2.0.7",
@@ -43,6 +44,7 @@
     "redux-seamless-immutable": "^0.4.0",
     "redux-thunk": "^2.3.0",
     "redux-watch": "^1.1.1",
+    "resium": "^1.4.1",
     "retire": "^1.6.3",
     "seamless-immutable": "^7.1.4"
   },
@@ -66,6 +68,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -96,7 +99,8 @@
     "resolve-url-loader": "^2.3.0",
     "sinon": "^4.1.2",
     "speed-measure-webpack-plugin": "^1.2.5",
-    "style-loader": "^0.19.0",
+    "strip-pragma-loader": "^1.0.0",
+    "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "webpack": "^4.2.9",
     "webpack-cli": "^3.2.1",

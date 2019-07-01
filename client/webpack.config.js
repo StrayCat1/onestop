@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 const path = require('path')
 require('babel-polyfill')
@@ -13,12 +14,33 @@ const assetPath = 'static'
 
 const smp = new SpeedMeasurePlugin()
 
+// cesium
+const cesiumSource = "node_modules/cesium/Source"
+const cesiumWorkers = "../Build/Cesium/Workers"
+
 const basePlugins = [
   new HtmlWebpackPlugin({
     inject: false,
     template: require('html-webpack-template'),
     lang: 'en-US',
-  })
+  }),
+  new CopyWebpackPlugin([
+    {
+      from: path.join(cesiumSource, cesiumWorkers),
+      to: "Workers",
+    },
+    {
+      from: path.join(cesiumSource, "Assets"),
+      to: "Assets",
+    },
+    {
+      from: path.join(cesiumSource, "Widgets"),
+      to: "Widgets",
+    },
+  ]),
+  new webpack.DefinePlugin({
+    CESIUM_BASE_URL: JSON.stringify(""),
+  }),
 ]
 
 const devPlugins = [
@@ -69,8 +91,18 @@ module.exports = env => {
           path: path.resolve(__dirname, 'build/dist'),
           publicPath: `/${rootPath}/`,
           filename: '[name]-[hash].bundle.js',
+          // Needed to compile multiline strings in Cesium
+          sourcePrefix: ''
         }
     ,
+    amd: {
+      // Enable webpack-friendly use of require in Cesium
+      toUrlUndefined: true
+    },
+    node: {
+      // Resolve node module use of fs
+      fs: 'empty'
+    },
     context: path.resolve(__dirname, 'src'),
     devtool:
         isProd ? false : 'cheap-module-eval-source-map',
@@ -111,7 +143,24 @@ module.exports = env => {
                 babelrcRoots: ['.', '../'],
               },
             },
-          }, {
+          },
+          isProd ? {
+            // Strip cesium pragmas for prod
+            test: /\.js$/,
+            enforce: "pre",
+            include: path.resolve(__dirname, cesiumSource),
+            use: [
+              {
+                loader: "strip-pragma-loader",
+                options: {
+                  pragmas: {
+                    debug: false,
+                  },
+                },
+              },
+            ],
+          } : {},
+          {
             test: /\.css$/,
             include: /node_modules/,
             use: [{
@@ -179,6 +228,8 @@ module.exports = env => {
           {
             'fa':
                 path.resolve(__dirname, 'img/font-awesome/white/svg/'),
+            cesium$: 'cesium/Cesium',
+            cesium: 'cesium/Source'
           },
     }
     ,
